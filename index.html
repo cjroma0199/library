@@ -14,24 +14,45 @@
     <header>
       <p>Library</p>
     </header>
+    <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <form action="#">
+          <input
+            type="text"
+            name="title"
+            id="bookTitle"
+            placeholder="Book title"
+            required
+          />
+          <input
+            type="text"
+            name="author"
+            id="bookAuthor"
+            placeholder="Book author"
+            required
+          />
+          <input type="number" name="pages" id="bookPages" min="10" max="10000" />
+          <div class="status">
+            <input type="checkbox" name="Read" id="bookStatus" />
+            <label for="bookStatus">Have read this book?</label>
+          </div>
+          <div class="buttons">
+            <button id="cancel">Cancel</button>
+            <button id="add">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
     <div class="container">
       <div class="book-container">
-        <div class="book">
-          <h2 class="book-title">Game of Thrones</h2>
-          <div class="group">
-            <p class="book-author">RR Martin</p>
-            <span class="book-status">Read</span>
-          </div>
-          <div class="pages">
-            <p>Pages</p>
-            <p>244</p>
-          </div>
-        </div>
-        <div class="book" id="add-book">
+        <div class="card" id="add-book">
           <span class="material-symbols-outlined"> add </span>
           <p class="add">Add new book</p>
         </div>
       </div>
     </div>
+    <script src="./library.js"></script>
   </body>
 </html>

@@ -1,3 +1,7 @@
+::root {
+  --dark-blue: rgb(15 23 42);
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -54,6 +58,7 @@ header button:hover {
   height: 50%;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .group {
@@ -64,17 +69,41 @@ header button:hover {
   align-items: center;
 }
 
+.book-author {
+  font-size: 1.2rem;
+}
+
+.book-author::before {
+  content: 'by';
+  display: block;
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
 .book-status {
   font-size: 1rem;
-  border: green 1px solid;
   padding: 5px 15px;
   border-radius: 20px;
   cursor: pointer;
+}
+
+.green {
+  border: green 1px solid;
   background-color: rgba(0, 128, 0, 0.103);
 }
 
-.book-status:hover {
-  background-color: rgba(0, 128, 0, 0.336);
+.red {
+  border: rgb(128, 0, 0) 1px solid;
+  background-color: rgba(128, 0, 0, 0.103);
+}
+
+.green:hover {
+  background-color: rgba(0, 128, 0, 0.303);
+}
+
+.red:hover {
+  background-color: rgba(128, 0, 0, 0.303);
 }
 
 .pages {
@@ -103,9 +132,123 @@ header button:hover {
 }
 
 #add-book:hover {
-  background-color: rgb(12, 16, 27);
+  background-color: rgb(10, 13, 22);
 }
 
 #add-book p {
   font-size: 1.5rem;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.8); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: rgb(2 6 23);
+  margin: 10% auto; /* 15% from the top and centered */
+  padding: 20px;
+  width: 350px;
+  height: 400px;
+  color: #5b8fb9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 40px;
+  border-radius: 5px;
+}
+
+.modal-content p {
+  text-align: center;
+  color: #fcb830;
+  padding: 0 10px;
+  font-size: 0.9em;
+  font-weight: 100;
+  line-height: 1.5em;
+}
+/* The Close Button */
+.close {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  align-self: flex-end;
+}
+
+.close:hover,
+.close:focus {
+  color: #dddddd;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-content button {
+  padding: 10px 20px;
+  transition: scale 0.5s;
+  border-radius: 5px;
+  background-color: rgb(2 6 23);
+  border: 1px solid white;
+  color: white;
+  cursor: pointer;
+}
+
+.modal-content button:hover {
+  background-color: rgb(2, 7, 29);
+}
+
+input[type='text'],
+input[type='number'] {
+  width: 100%;
+  height: 40px;
+  margin-bottom: 20px;
+  padding: 10px;
+  color: black;
+  font-size: 1.2rem;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+input[type='checkbox'] {
+  height: 25px;
+  width: 25px;
+}
+
+.status label {
+  font-size: 1.3rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 60px;
+}
+.buttons button {
+  font-size: 1.3rem;
+}
+
+.delete {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.delete:hover,
+.delete:focus {
+  color: #ad1f1f;
+  text-decoration: none;
+  cursor: pointer;
 }
