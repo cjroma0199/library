@@ -9,43 +9,49 @@ const addBookStatus = document.querySelector('#bookStatus');
 const addBook = document.querySelector('#add');
 const bookShelf = document.querySelector('.book-container');
 
-let myBooks = [
-  {
-    id: 0,
-    title: 'The Great Gatsby',
-    author: 'F. Scott Fitzgerald',
-    pages: 180,
-    read: true,
-  },
-  {
-    id: 1,
-    title: 'To Kill a Mockingbird',
-    author: 'Harper Lee',
-    pages: 281,
-    read: true,
-  },
-  {
-    id: 2,
-    title: '1984',
-    author: 'George Orwell',
-    pages: 328,
-    read: false,
-  },
-  {
-    id: 3,
-    title: 'Pride and Prejudice',
-    author: 'Jane Austen',
-    pages: 279,
-    read: true,
-  },
-  {
-    id: 4,
-    title: 'The Catcher in the Rye',
-    author: 'J.D. Salinger',
-    pages: 224,
-    read: false,
-  },
-];
+function setDefaultBooks() {
+  if (localStorage.Books) return;
+
+  localStorage.Books = JSON.stringify([
+    {
+      id: 0,
+      title: 'The Great Gatsby',
+      author: 'F. Scott Fitzgerald',
+      pages: 180,
+      read: true,
+    },
+    {
+      id: 1,
+      title: 'To Kill a Mockingbird',
+      author: 'Harper Lee',
+      pages: 281,
+      read: true,
+    },
+    {
+      id: 2,
+      title: '1984',
+      author: 'George Orwell',
+      pages: 328,
+      read: false,
+    },
+    {
+      id: 3,
+      title: 'Pride and Prejudice',
+      author: 'Jane Austen',
+      pages: 279,
+      read: true,
+    },
+    {
+      id: 4,
+      title: 'The Catcher in the Rye',
+      author: 'J.D. Salinger',
+      pages: 224,
+      read: false,
+    },
+  ]);
+}
+setDefaultBooks();
+let myBooks = JSON.parse(localStorage.Books);
 function Book(title, author, pages, read) {
   this.id = myBooks.length ? myBooks.length : 0;
   this.title = title;
@@ -56,8 +62,9 @@ function Book(title, author, pages, read) {
 
 function addBookToLibrary(book) {
   myBooks.push(book);
+  localStorage.Books = JSON.stringify(myBooks);
   clearLibrary();
-  displayBook(myBooks);
+  displayBook(localStorage.Books);
 }
 function createBook({ id, title, author, pages, read }) {
   const book = document.createElement('div');
@@ -104,8 +111,9 @@ function createBook({ id, title, author, pages, read }) {
   return book;
 }
 function displayBook(books) {
-  books.forEach((book) => {
-    bookShelf.appendChild(createBook(book));
+  let parsedBooks = JSON.parse(books);
+  parsedBooks.forEach((book) => {
+    if (book) bookShelf.appendChild(createBook(book));
   });
 }
 
@@ -122,6 +130,7 @@ function closeForm() {
 
 function deleteBook(e) {
   delete myBooks[e.target.parentNode.dataset.dataId];
+  localStorage.Books = JSON.stringify(myBooks);
   bookShelf.removeChild(e.target.parentNode);
 }
 
@@ -143,6 +152,8 @@ function changeStatus(e) {
     e.target.textContent = 'Not read';
     myBooks[e.target.parentNode.parentNode.dataset.dataId].read = false;
   }
+
+  localStorage.Books = JSON.stringify(myBooks);
 }
 
 addBookButton.addEventListener('click', function () {
@@ -174,4 +185,4 @@ addBook.addEventListener('click', function (e) {
   closeForm();
 });
 
-displayBook(myBooks);
+displayBook(localStorage.Books);

@@ -39,7 +39,7 @@ header button:hover {
   gap: 3rem;
 }
 
-.book {
+.card {
   position: relative;
   background: rgb(12, 17, 29);
   width: 250px;
